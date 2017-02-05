@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+    <LinearLayout
+    xmlns:andriod="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    andriod:layout_width="match_parent"
+    andriod:layout_height="match_parent"
+    tools:context="com.example.armani.unilocator.MapsActivity">
+
+    <FrameLayout
+        andriod:layout_width="match_parent"
+        andriod:layout_height="match_parent"
+        andriod:id="@+id/container_main">
+    </FrameLayout>
+
+</LinearLayout>
+
+
