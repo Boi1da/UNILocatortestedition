@@ -28,6 +28,7 @@
                     android:background="#00000000"
                     />
                 <EditText
+                    android:id="@+id/campus_text"
                     android:layout_width="270dp"
                     android:layout_height="40dp"
                     android:hint="@string/campus_hint"

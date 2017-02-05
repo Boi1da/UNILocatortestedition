@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     andriod:layout_width="match_parent"
     andriod:layout_height="match_parent"
-    tools:context="com.example.armani.unilocator.MapsActivity">
+    tools:context="com.example.armani.unilocator.activities.MapsActivity">
 
     <FrameLayout
         andriod:layout_width="match_parent"

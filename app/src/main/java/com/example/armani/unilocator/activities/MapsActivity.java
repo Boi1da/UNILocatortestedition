@@ -1,4 +1,4 @@
-package com.example.armani.unilocator;
+package com.example.armani.unilocator.activities;
 
 import android.app.Activity;
 import android.content.pm.PackageManager;
@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
 
+import com.example.armani.unilocator.R;
 import com.example.armani.unilocator.fragments.MainFragment;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;

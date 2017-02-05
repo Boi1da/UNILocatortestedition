@@ -1,13 +1,19 @@
 package com.example.armani.unilocator.fragments;
 
 
+import android.content.Context;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
 
 import com.example.armani.unilocator.R;
 import com.example.armani.unilocator.model.Unilocator;
@@ -22,7 +28,10 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -63,6 +72,29 @@ public class MainFragment extends Fragment implements OnMapReadyCallback {
         //This must be used to actually use the map
         mapFragment.getMapAsync(this);
 
+        //Someone does a search , they press enter key then pass that into the upday
+        final EditText campusText = (EditText)view.findViewById(R.id.campus_text);
+        campusText.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+
+                if ((event.getAction() == KeyEvent.ACTION_DOWN) && keyCode == KeyEvent.KEYCODE_ENTER){
+
+                String text = campusText.getText().toString();
+
+                InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(campusText.getWindowToken(), 0);
+
+                    updateMapForCampus(text);
+                    return true;
+            }
+
+            return false;
+
+
+        }
+        });
+
         return view;
 
     }
@@ -90,6 +122,15 @@ public class MainFragment extends Fragment implements OnMapReadyCallback {
             mMap.addMarker(userMarker);
             Log.v("DONKEY" , "Current location: " + latLng.latitude + " Long: " + latLng.longitude);
         }
+/*
+        try {
+            Geocoder geocoder = new Geocoder(getContext(), Locale.getDefault());
+            List<Address> campusLoc = geocoder.getFromLocation(latLng.latitude,latLng.longitude, 1);
+            String campus = campusLoc.get(0);
+        } catch (IOException exception) {
+
+        }
+        */
 
         updateMapForCampus("stjohns");
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 20));
@@ -108,6 +149,7 @@ public class MainFragment extends Fragment implements OnMapReadyCallback {
             marker.snippet(loc.getLocationAddress());
             if (x == 1) {
                 marker.icon(BitmapDescriptorFactory.fromResource(R.drawable.weight_map_pin));
+                mMap.addMarker(marker);
             }
             marker.icon(BitmapDescriptorFactory.fromResource(R.drawable.map_pin));
             mMap.addMarker(marker);
