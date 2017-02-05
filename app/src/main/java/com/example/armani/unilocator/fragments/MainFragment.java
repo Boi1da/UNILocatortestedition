@@ -106,6 +106,9 @@ public class MainFragment extends Fragment implements OnMapReadyCallback {
             MarkerOptions marker = new MarkerOptions().position(new LatLng(loc.getLatitude(), loc.getLongitude()));
             marker.title(loc.getLocationTitle());
             marker.snippet(loc.getLocationAddress());
+            if (x == 1) {
+                marker.icon(BitmapDescriptorFactory.fromResource(R.drawable.weight_map_pin));
+            }
             marker.icon(BitmapDescriptorFactory.fromResource(R.drawable.map_pin));
             mMap.addMarker(marker);
 

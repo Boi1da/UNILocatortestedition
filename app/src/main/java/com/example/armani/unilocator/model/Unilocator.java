@@ -39,6 +39,8 @@ public class Unilocator {
         this.locationAddress = locationAddress;
         this.locationImrUrl = locationImrUrl;
     }
+
+
 }
 
 
