@@ -22,9 +22,12 @@ public class DataService {
         //Pretend to get data from a server for now cuz im lazy af
 
         ArrayList<Unilocator> list = new ArrayList<>();
-        list.add(new Unilocator(51.533f, -0.468f,"Eastern Gateway","Business Centre + Lecture Hall","esgw"));
-        list.add(new Unilocator(51.533f, -0.470f,"Brunel University Sports Centre","Sports related","sportshall"));
-        list.add(new Unilocator(51.534f, -0.469f,"St Johns","STEM Lab Building","stjohns"));
+//        list.add(new Unilocator(51.533f, -0.468f,"Eastern Gateway","Business Centre + Lecture Hall","esgw"));
+//        list.add(new Unilocator(51.533f, -0.470f,"Brunel University Sports Centre","Sports related","sportshall"));
+//        list.add(new Unilocator(51.534f, -0.469f,"St Johns","STEM Lab Building","stjohns"));
+        list.add(new Unilocator(51.585f, -0.362f,"North Harrow Station","Station","stjohns"));
+        list.add(new Unilocator(51.586f, -0.361f,"GYM","Fitness Related","stjohns"));
+        list.add(new Unilocator(51.587f, -0.362f,"St Johns","STEM Lab Building","stjohns"));
         return list;
     }
 }
