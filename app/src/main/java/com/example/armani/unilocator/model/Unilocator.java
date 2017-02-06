@@ -8,7 +8,7 @@ public class Unilocator {
     final String DRAWABLE = "drawable/";
 
    public String getImgUrl() {
-        return DRAWABLE + locationImrUrl;
+        return DRAWABLE + UserImrUrl;
     }
 
     public float getLongitude() {
@@ -19,32 +19,32 @@ public class Unilocator {
         return latitude;
     }
 
-    public String getLocationTitle() {
-        return locationTitle;
+    public String getUserTitle() {
+        return userTitle;
     }
 
-    public String getLocationAddress() {
-        return locationAddress;
+    public String getUserDescription() {
+        return userDescription;
     }
 
-    public String getLocationImrUrl() {
-        return locationImrUrl;
+    public String getUserImrUrl() {
+        return UserImrUrl;
     }
 
     private float longitude;
     private float latitude;
-    private String locationTitle;
-    private String locationAddress;
-    private String locationImrUrl;
+    private String userTitle;
+    private String userDescription;
+    private String UserImrUrl;
 
 
     //Change tommorow zzzz
-    public Unilocator(float latitude, float longitude, String locationTitle, String locationAddress, String locationImrUrl) {
+    public Unilocator(float latitude, float longitude, String userTitle, String userDescription, String UserImrUrl) {
         this.longitude = longitude;
         this.latitude = latitude;
-        this.locationTitle = locationTitle;
-        this.locationAddress = locationAddress;
-        this.locationImrUrl = locationImrUrl;
+        this.userTitle = userTitle;
+        this.userDescription = userDescription;
+        this.UserImrUrl = UserImrUrl;
     }
 
 

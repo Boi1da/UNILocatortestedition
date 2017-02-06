@@ -33,8 +33,8 @@ public class LocationViewHolder extends RecyclerView.ViewHolder {
         String uri = location.getImgUrl();
         int resource = userImage.getResources().getIdentifier(uri, null, userImage.getContext().getPackageName());
         userImage.setImageResource(resource);
-        userTitle.setText(location.getLocationTitle());
-        userDescription.setText(location.getLocationAddress());
+        userTitle.setText(location.getUserTitle());
+        userDescription.setText(location.getUserDescription());
 
     }
 }

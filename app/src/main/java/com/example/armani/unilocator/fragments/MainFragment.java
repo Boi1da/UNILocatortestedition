@@ -155,15 +155,22 @@ public class MainFragment extends Fragment implements OnMapReadyCallback {
         for (int x = 0; x < locations.size(); x++) {
             Unilocator loc = locations.get(x);
             MarkerOptions marker = new MarkerOptions().position(new LatLng(loc.getLatitude(), loc.getLongitude()));
-            marker.title(loc.getLocationTitle());
-            marker.snippet(loc.getLocationAddress());
-            if (x == 1) { //change too
+            marker.title(loc.getUserTitle());
+            marker.snippet(loc.getUserDescription());
+            if (loc.getUserDescription() == "Sports related") { //change too
                 marker.icon(BitmapDescriptorFactory.fromResource(R.drawable.weight_map_pin));
                 mMap.addMarker(marker);
+                Log.v("DONKEY", "Hey this is the sports hall!");
+            } else if (loc.getUserDescription() == "Lecture Hall") {
+                marker.icon(BitmapDescriptorFactory.fromResource(R.drawable.book_map_pin));
+                mMap.addMarker(marker);
+                Log.v("DONKEY", "Hey, this is the lec hall! ");
+            } else {
+                Log.v("DONKEY", "Hey you made it this far! ");
+                //Default code looking pin
+                marker.icon(BitmapDescriptorFactory.fromResource(R.drawable.map_pin));
+                mMap.addMarker(marker);
             }
-            marker.icon(BitmapDescriptorFactory.fromResource(R.drawable.map_pin));
-            mMap.addMarker(marker);
-
         }
     }
 
