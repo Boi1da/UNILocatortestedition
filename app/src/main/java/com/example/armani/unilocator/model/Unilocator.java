@@ -5,6 +5,11 @@ package com.example.armani.unilocator.model;
  */
 
 public class Unilocator {
+    final String DRAWABLE = "drawable/";
+
+   public String getImgUrl() {
+        return DRAWABLE + locationImrUrl;
+    }
 
     public float getLongitude() {
         return longitude;
@@ -32,6 +37,8 @@ public class Unilocator {
     private String locationAddress;
     private String locationImrUrl;
 
+
+    //Change tommorow zzzz
     public Unilocator(float latitude, float longitude, String locationTitle, String locationAddress, String locationImrUrl) {
         this.longitude = longitude;
         this.latitude = latitude;

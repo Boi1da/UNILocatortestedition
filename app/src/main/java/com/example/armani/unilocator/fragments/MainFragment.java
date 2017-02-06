@@ -43,6 +43,7 @@ public class MainFragment extends Fragment implements OnMapReadyCallback {
 
     private GoogleMap mMap; //This is the actual map that i can use
     private MarkerOptions userMarker;
+    private LocationsListFragment mListFragment;
 
     public MainFragment() {
         // Required empty public constructor
@@ -72,6 +73,14 @@ public class MainFragment extends Fragment implements OnMapReadyCallback {
         //This must be used to actually use the map
         mapFragment.getMapAsync(this);
 
+        //Add the fragment of the List
+        mListFragment = (LocationsListFragment)getActivity().getSupportFragmentManager().findFragmentById(R.id.container_locations_list);
+
+        if (mListFragment == null) {
+            mListFragment = LocationsListFragment.newInstance();
+            getActivity().getSupportFragmentManager().beginTransaction().add(R.id.container_locations_list, mListFragment).commit();
+        }
+
         //Someone does a search , they press enter key then pass that into the upday
         final EditText campusText = (EditText)view.findViewById(R.id.campus_text);
         campusText.setOnKeyListener(new View.OnKeyListener() {
@@ -85,6 +94,7 @@ public class MainFragment extends Fragment implements OnMapReadyCallback {
                 InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
                 imm.hideSoftInputFromWindow(campusText.getWindowToken(), 0);
 
+                   // showList();
                     updateMapForCampus(text);
                     return true;
             }
@@ -94,7 +104,7 @@ public class MainFragment extends Fragment implements OnMapReadyCallback {
 
         }
         });
-
+        //hideList();
         return view;
 
     }
@@ -147,7 +157,7 @@ public class MainFragment extends Fragment implements OnMapReadyCallback {
             MarkerOptions marker = new MarkerOptions().position(new LatLng(loc.getLatitude(), loc.getLongitude()));
             marker.title(loc.getLocationTitle());
             marker.snippet(loc.getLocationAddress());
-            if (x == 1) {
+            if (x == 1) { //change too
                 marker.icon(BitmapDescriptorFactory.fromResource(R.drawable.weight_map_pin));
                 mMap.addMarker(marker);
             }
@@ -155,6 +165,17 @@ public class MainFragment extends Fragment implements OnMapReadyCallback {
             mMap.addMarker(marker);
 
         }
+    }
+
+    //Hides the List
+    private void hideList(){
+        getActivity().getSupportFragmentManager().beginTransaction().hide(mListFragment).commit();
+
+    }
+
+    //Shows the List
+    private void showList(){
+        getActivity().getSupportFragmentManager().beginTransaction().show(mListFragment).commit();
     }
 
 }
