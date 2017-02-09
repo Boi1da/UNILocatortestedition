@@ -45,6 +45,7 @@ public class MainFragment extends Fragment implements OnMapReadyCallback {
     private MarkerOptions userMarker;
     private LocationsListFragment mListFragment;
 
+
     public MainFragment() {
         // Required empty public constructor
     }
@@ -59,6 +60,8 @@ public class MainFragment extends Fragment implements OnMapReadyCallback {
         super.onCreate(savedInstanceState);
 
     }
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -94,7 +97,7 @@ public class MainFragment extends Fragment implements OnMapReadyCallback {
                 InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
                 imm.hideSoftInputFromWindow(campusText.getWindowToken(), 0);
 
-                   // showList();
+                    showList();
                     updateMapForCampus(text);
                     return true;
             }
@@ -104,10 +107,12 @@ public class MainFragment extends Fragment implements OnMapReadyCallback {
 
         }
         });
-        //hideList();
+        hideList();
         return view;
 
     }
+
+
 
 
     /**
@@ -149,7 +154,8 @@ public class MainFragment extends Fragment implements OnMapReadyCallback {
 
     //Change to work with the update
     private void updateMapForCampus(String campus){
-        //Check 10 mile raduis for stuff
+
+        //Check 10 mile radius for stuff
         ArrayList<Unilocator> locations = DataService.getInstance().getCampusLocationsWithin10milesofEnteredSite(campus);
 
         for (int x = 0; x < locations.size(); x++) {
@@ -161,10 +167,12 @@ public class MainFragment extends Fragment implements OnMapReadyCallback {
                 marker.icon(BitmapDescriptorFactory.fromResource(R.drawable.weight_map_pin));
                 mMap.addMarker(marker);
                 Log.v("DONKEY", "Hey this is the sports hall!");
+
             } else if (loc.getUserDescription() == "Lecture Hall") {
                 marker.icon(BitmapDescriptorFactory.fromResource(R.drawable.book_map_pin));
                 mMap.addMarker(marker);
                 Log.v("DONKEY", "Hey, this is the lec hall! ");
+
             } else {
                 Log.v("DONKEY", "Hey you made it this far! ");
                 //Default code looking pin
@@ -173,6 +181,10 @@ public class MainFragment extends Fragment implements OnMapReadyCallback {
             }
         }
     }
+
+
+
+
 
     //Hides the List
     private void hideList(){
@@ -184,5 +196,6 @@ public class MainFragment extends Fragment implements OnMapReadyCallback {
     private void showList(){
         getActivity().getSupportFragmentManager().beginTransaction().show(mListFragment).commit();
     }
+
 
 }

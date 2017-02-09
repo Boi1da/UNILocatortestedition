@@ -44,8 +44,11 @@ public class LocationsListFragment extends Fragment {
         RecyclerView recyclerView = (RecyclerView)view.findViewById(R.id.recycler_locations);
         recyclerView.setHasFixedSize(true);
 
-        LocationsAdapter adapter = new LocationsAdapter(DataService.getInstance().getCampusLocationsWithin10milesofEnteredSite("GYM"));
+        LocationsAdapter adapter = new LocationsAdapter(DataService.getInstance().getUserDataForLocations("GYM"));
+        // LocationsAdapter adapter = new LocationsAdapter(DataService.getInstance().getCampusLocationsWithin10milesofEnteredSite("GYM"));
         recyclerView.setAdapter(adapter);
+
+
 
         //Want this to pop up vertical
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());

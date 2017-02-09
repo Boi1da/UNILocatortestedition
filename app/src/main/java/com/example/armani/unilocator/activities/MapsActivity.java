@@ -121,7 +121,7 @@ public class MapsActivity extends FragmentActivity implements GoogleApiClient.On
         Log.v("DONKEY, "," Starting locations services Called"); //For debugging
 
         try { //See if this works
-            LocationRequest req = LocationRequest.create().setPriority(LocationRequest.PRIORITY_LOW_POWER);
+            LocationRequest req = LocationRequest.create().setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
              /*PARAMETERS EXPLAINED
             1)It wants the Api Client were using
             2)The request we declared above ( how much power etc)
