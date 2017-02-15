@@ -122,7 +122,7 @@ public class MapsActivity extends FragmentActivity implements GoogleApiClient.On
 
         try { //See if this works
             LocationRequest req = LocationRequest.create().setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
-             /*PARAMETERS EXPLAINED
+             /*PARAMETERS EXPLAINEDkisididiid
             1)It wants the Api Client were using
             2)The request we declared above ( how much power etc)
             3)Were is it calling back too
