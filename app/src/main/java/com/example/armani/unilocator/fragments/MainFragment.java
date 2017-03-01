@@ -43,6 +43,8 @@ public class MainFragment extends Fragment implements OnMapReadyCallback {
 
     private GoogleMap mMap; //This is the actual map that i can use
     private MarkerOptions userMarker;
+    private LocationsListFragment mListFragment;
+
 
     public MainFragment() {
         // Required empty public constructor
@@ -59,6 +61,8 @@ public class MainFragment extends Fragment implements OnMapReadyCallback {
 
     }
 
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -71,6 +75,14 @@ public class MainFragment extends Fragment implements OnMapReadyCallback {
                 .findFragmentById(R.id.map);
         //This must be used to actually use the map
         mapFragment.getMapAsync(this);
+
+        //Add the fragment of the List
+        mListFragment = (LocationsListFragment)getActivity().getSupportFragmentManager().findFragmentById(R.id.container_locations_list);
+
+        if (mListFragment == null) {
+            mListFragment = LocationsListFragment.newInstance();
+            getActivity().getSupportFragmentManager().beginTransaction().add(R.id.container_locations_list, mListFragment).commit();
+        }
 
         //Someone does a search , they press enter key then pass that into the upday
         final EditText campusText = (EditText)view.findViewById(R.id.campus_text);
@@ -85,6 +97,7 @@ public class MainFragment extends Fragment implements OnMapReadyCallback {
                 InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
                 imm.hideSoftInputFromWindow(campusText.getWindowToken(), 0);
 
+                    showList();
                     updateMapForCampus(text);
                     return true;
             }
@@ -94,10 +107,12 @@ public class MainFragment extends Fragment implements OnMapReadyCallback {
 
         }
         });
-
+        hideList();
         return view;
 
     }
+
+
 
 
     /**
@@ -139,22 +154,48 @@ public class MainFragment extends Fragment implements OnMapReadyCallback {
 
     //Change to work with the update
     private void updateMapForCampus(String campus){
-        //Check 10 mile raduis for stuff
+
+        //Check 10 mile radius for stuff
         ArrayList<Unilocator> locations = DataService.getInstance().getCampusLocationsWithin10milesofEnteredSite(campus);
 
         for (int x = 0; x < locations.size(); x++) {
             Unilocator loc = locations.get(x);
             MarkerOptions marker = new MarkerOptions().position(new LatLng(loc.getLatitude(), loc.getLongitude()));
-            marker.title(loc.getLocationTitle());
-            marker.snippet(loc.getLocationAddress());
-            if (x == 1) {
+            marker.title(loc.getUserTitle());
+            marker.snippet(loc.getUserDescription());
+            if (loc.getUserDescription() == "Sports related") { //change too
                 marker.icon(BitmapDescriptorFactory.fromResource(R.drawable.weight_map_pin));
                 mMap.addMarker(marker);
-            }
-            marker.icon(BitmapDescriptorFactory.fromResource(R.drawable.map_pin));
-            mMap.addMarker(marker);
+                Log.v("DONKEY", "Hey this is the sports hall!");
 
+            } else if (loc.getUserDescription() == "Lecture Hall") {
+                marker.icon(BitmapDescriptorFactory.fromResource(R.drawable.book_map_pin));
+                mMap.addMarker(marker);
+                Log.v("DONKEY", "Hey, this is the lec hall! ");
+
+            } else {
+                Log.v("DONKEY", "Hey you made it this far! ");
+                //Default code looking pin
+                marker.icon(BitmapDescriptorFactory.fromResource(R.drawable.map_pin));
+                mMap.addMarker(marker);
+            }
         }
     }
+
+
+
+
+
+    //Hides the List
+    private void hideList(){
+        getActivity().getSupportFragmentManager().beginTransaction().hide(mListFragment).commit();
+
+    }
+
+    //Shows the List
+    private void showList(){
+        getActivity().getSupportFragmentManager().beginTransaction().show(mListFragment).commit();
+    }
+
 
 }
